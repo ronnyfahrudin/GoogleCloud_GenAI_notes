@@ -1,2 +1,2 @@
 # Google_Cloud_GenAI_notes
-Result of Google GenAI Course end to end to become Prompt Engineer
+Notes and Result Experimenting of Google GenAI Course end to end to become Prompt Engineer
