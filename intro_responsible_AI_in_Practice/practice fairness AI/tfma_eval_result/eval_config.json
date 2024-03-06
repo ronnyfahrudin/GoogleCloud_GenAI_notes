@@ -1,0 +1,39 @@
+{
+  "evalConfig": {
+    "modelSpecs": [
+      {
+        "labelKey": "toxicity"
+      }
+    ],
+    "slicingSpecs": [
+      {},
+      {
+        "featureKeys": [
+          "gender"
+        ]
+      }
+    ],
+    "metricsSpecs": [
+      {
+        "metrics": [
+          {
+            "className": "FairnessIndicators",
+            "config": "{ \"thresholds\": [0.1, 0.3, 0.5, 0.7, 0.9] }"
+          }
+        ],
+        "modelNames": [
+          ""
+        ]
+      }
+    ],
+    "options": {
+      "computeConfidenceIntervals": false
+    }
+  },
+  "version": "0.43.0",
+  "dataLocation": "/root/.keras/datasets/validate_tf_processed.tfrecord",
+  "fileFormat": "tfrecords",
+  "modelLocations": {
+    "": "saved_model"
+  }
+}
