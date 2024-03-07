@@ -1,0 +1,58 @@
+1. Now you will explore content classification. Re-create the request.json file by executing the following commands:
+
+
+rm request.json
+nano request.json
+
+2. Replace the code in request.json with the following statement:
+
+  {
+    'document':{
+      'type':'PLAIN_TEXT',
+      'content':'Google’s Plan for the Future of Work: Privacy Robots and Balloon Walls'
+    },
+    'classificationModelOptions': {
+      'v2Model': {
+        'contentCategoriesVersion': 'V2',
+      }
+    }
+  }
+  
+3. Send the request to the API's classifyText endpoint by executing the following command:
+curl "https://language.googleapis.com/v1/documents:classifyText?key=${API_KEY}" \
+  -s -X POST -H "Content-Type: application/json" --data-binary @request.json > result.json
+  
+4. Check the response type by executing the following command:
+
+cat result.json
+{
+  "categories": [
+    {
+      "name": "/Science/Engineering & Technology/Robotics",
+      "confidence": 0.22492509
+    },
+    {
+      "name": "/News/Business News/Company News",
+      "confidence": 0.2238491
+    },
+    {
+      "name": "/News/Technology News",
+      "confidence": 0.19114923
+    },
+    {
+      "name": "/Internet & Telecom/Search Engines/Other",
+      "confidence": 0.17344825
+    },
+    {
+      "name": "/Science/Computer Science/Machine Learning & Artificial Intelligence",
+      "confidence": 0.10473869
+    },
+    {
+      "name": "/People & Society/Social Issues & Advocacy/Other",
+      "confidence": 0.10268368
+    }
+  ]
+}
+What do you notice about the results? Are any of the labels relevant to the problem at hand? The model does a great job classifying the article title into different categories, but it does not predict the publisher of the article as you hoped.
+
+The model being called has been trained for a different set of labels than what you were looking for. To predict the labels that you desire, you can train a new model using AutoML. While AutoML is available through Model Garden, it is currently only for training tabular models. We will train our model from the provided dataset instead.

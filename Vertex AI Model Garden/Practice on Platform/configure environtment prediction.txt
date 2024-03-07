@@ -1,0 +1,18 @@
+1. Return to the SSH session you opened earlier. If you closed the session, the repeat the directions in Task 3 to create a new SSH session.
+
+2. Install the jq tool to parse the JSON responses you will see later:
+sudo apt-get -y install jq
+
+3. To create an Endpoint environment variable, run the following command:
+ENDPOINT="https://automl-service-tynuw6vocq-uc.a.run.app"
+
+4. Download the test files from Cloud Storage:
+gsutil cp gs://cloud-training/OCBL400/CLOUD* .
+
+The example files `CLOUD1-JSON` and `CLOUD2-JSON` have content similar to:
+{
+  "instances": {
+    "mimeType": "text/plain",
+    "content": "Google's plan for the future of work."
+  }
+}

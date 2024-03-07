@@ -1,0 +1,62 @@
+steps sentiment analysis with NL API google
+
+1. In this task, you submit a request written in JSON (JavaScript Object Notation). The Natural Language API lets you perform sentiment analysis on a block of text.
+
+Open the request.json file by executing the following command: nano request.json
+
+
+2. Paste the following JSON into the request.json file:
+ {
+  "document":{
+    "type":"PLAIN_TEXT",
+    "content":"The sweater fits well and I love the material too. I’m buying one for my sister! "
+  },
+  "encodingType": "UTF8"
+}
+
+3. Press CTRL+O, ENTER to save the file, and press CTRL+X to exit nano.
+
+4. Send the request to the API's analyzeSentiment endpoint by executing the following command:
+
+curl "https://language.googleapis.com/v1/documents:analyzeSentiment?key=${API_KEY}" \
+  -s -X POST -H "Content-Type: application/json" --data-binary @request.json > result.json
+  
+5. Check the response type by executing the following command:
+  cat result.json
+  
+ {
+  "documentSentiment": {
+    "magnitude": 1.9,
+    "score": 0.9
+  },
+  "language": "en",
+  "sentences": [
+    {
+      "text": {
+        "content": "The sweater fits well and I love the material too.",
+        "beginOffset": 0
+      },
+      "sentiment": {
+        "magnitude": 0.9,
+        "score": 0.9
+      }
+    },
+    {
+      "text": {
+        "content": "I’m buying one for my sister!",
+        "beginOffset": 51
+      },
+      "sentiment": {
+        "magnitude": 0.9,
+        "score": 0.9
+      }
+    }
+  ]
+}
+Notice that you get two types of sentiment values: sentiment for the document as a whole, and sentiment broken down by sentence. This matches what you saw in the model card in Model Garden, as well as the documentation. The sentiment method returns two values:
+
+score - is a number from -1.0 to 1.0 indicating how positive or negative the statement is.
+magnitude - is a number ranging from 0 to infinity that represents the weight of sentiment expressed in the statement, regardless of being positive or negative.
+Longer blocks of text with heavily weighted statements have higher magnitude values. The score for the first sentence is positive (0.9), whereas the score for the second sentence is also (0.9).
+
+
